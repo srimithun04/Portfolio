@@ -40,13 +40,7 @@ You only need a modern web browser (like Chrome, Firefox, or Edge).
 ### Installation
 
 1.  Clone the repository to your local machine:
-    ```sh
-    git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
-    ```
 2.  Navigate into the project directory:
-    ```sh
-    cd your-repo-name
-    ```
 3.  Open the `index.html` file in your web browser. That's it!
 
 ---
