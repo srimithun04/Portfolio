@@ -1,5 +1,44 @@
 document.addEventListener('DOMContentLoaded', function() {
     
+    // --- Theme Toggling ---
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+    // Set initial theme based on localStorage or OS preference
+    if (localStorage.getItem('color-theme') === 'dark' || 
+       (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        themeToggleLightIcon.classList.remove('hidden');
+    } else {
+        document.documentElement.classList.remove('dark');
+        themeToggleDarkIcon.classList.remove('hidden');
+    }
+
+    // Listener for theme toggle button
+    themeToggleBtn.addEventListener('click', function() {
+        themeToggleDarkIcon.classList.toggle('hidden');
+        themeToggleLightIcon.classList.toggle('hidden');
+
+        if (localStorage.getItem('color-theme')) {
+            if (localStorage.getItem('color-theme') === 'light') {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            }
+        } else {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        }
+    });
+
     // --- Data for Skills and Projects ---
     const skills = [
         { name: 'C', icon: 'ph-file-c' },
@@ -12,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'Django', icon: 'ph-leaf' }, // Stand-in
         { name: 'Flask', icon: 'ph-brandy' }, // Stand-in
         { name: 'Git', icon: 'ph-git-branch' },
+        { name: 'Bootstrap', icon: 'ph-bootstrap-logo' }
     ];
 
     const projects = [
@@ -19,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'E-commerce Website',
             description: 'A full-featured e-commerce platform for an electronics shop.',
             details: 'Engineered with ASP.NET MVC, it includes product catalogs, a shopping cart, and a secure checkout process, all managed by a robust SQL backend.',
-            tech: ['ASP.NET', 'C#','HTML' ,'SQL', 'JavaScript'],
+            tech: ['ASP.NET', 'C#', 'SQL', 'JavaScript'],
             github: '#',
             live: '#'
         },
@@ -27,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'Ransomware Detection',
             description: 'A security tool to scan files and detect potential ransomware threats.',
             details: 'Utilizes Python and machine learning principles to identify malware through file signature and behavior analysis, with functionality to quarantine threats.',
-            tech: ['Python', 'Flask'],
+            tech: ['Python', 'Machine Learning'],
             github: '#',
             live: '#'
         },
@@ -52,24 +92,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Dynamic Content Injection ---
 
     // Inject Skills
-    const skillsContainer = document.querySelector('#skills .grid');
+    const skillsContainer = document.getElementById('skills-container');
     if (skillsContainer) {
         skills.forEach(skill => {
-            // Debugging line to help check the generated class names in the browser console
-            console.log(`Creating icon for: ${skill.name}, Class: "ph-fill ${skill.icon}"`);
-            
             const skillEl = document.createElement('div');
             skillEl.className = 'glass-card p-4 rounded-lg flex flex-col items-center justify-center';
             skillEl.innerHTML = `
                 <i class="ph-fill ${skill.icon} text-5xl text-accent mb-2"></i>
-                <span class="text-slate-300">${skill.name}</span>
+                <span class="card-description">${skill.name}</span>
             `;
             skillsContainer.appendChild(skillEl);
         });
     }
 
     // Inject Projects
-    const projectsContainer = document.querySelector('#projects .grid');
+    const projectsContainer = document.getElementById('projects-container');
     if (projectsContainer) {
         projects.forEach(project => {
             const projectEl = document.createElement('div');
@@ -77,17 +114,17 @@ document.addEventListener('DOMContentLoaded', function() {
             projectEl.innerHTML = `
                 <div class="project-card-inner">
                     <div class="project-card-front">
-                        <h3 class="text-2xl font-bold text-slate-100 mb-2">${project.title}</h3>
-                        <p class="text-slate-400">${project.description}</p>
+                        <h3 class="text-2xl card-title mb-2">${project.title}</h3>
+                        <p class="card-description">${project.description}</p>
                     </div>
                     <div class="project-card-back">
-                        <p class="text-slate-300 mb-4">${project.details}</p>
+                        <p class="card-description mb-4">${project.details}</p>
                         <div class="flex flex-wrap justify-center gap-2 mb-4">
-                            ${project.tech.map(t => `<span class="bg-slate-700 text-accent text-xs font-semibold px-2 py-1 rounded-full">${t}</span>`).join('')}
+                            ${project.tech.map(t => `<span class="card-tech-tag text-accent text-xs font-semibold px-2 py-1 rounded-full">${t}</span>`).join('')}
                         </div>
                         <div class="flex space-x-4">
-                            <a href="${project.github}" target="_blank" class="hover:text-accent"><i class="ph-github-logo text-2xl"></i></a>
-                            <a href="${project.live}" target="_blank" class="hover:text-accent"><i class="ph-arrow-square-out text-2xl"></i></a>
+                            <a href="${project.github}" target="_blank" class="hover:text-accent"><i class="ph-fill ph-github-logo text-2xl"></i></a>
+                            <a href="${project.live}" target="_blank" class="hover:text-accent"><i class="ph-fill ph-arrow-square-out text-2xl"></i></a>
                         </div>
                     </div>
                 </div>
@@ -112,11 +149,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const header = document.getElementById('header');
         if (header) {
             if (window.scrollY > 50) {
-                header.style.backgroundColor = 'rgba(10, 25, 47, 0.85)';
-                header.style.backdropFilter = 'blur(10px)';
+                header.classList.add('header-scrolled');
             } else {
-                header.style.backgroundColor = 'transparent';
-                header.style.backdropFilter = 'none';
+                header.classList.remove('header-scrolled');
             }
         }
     });
@@ -139,16 +174,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Scroll Reveal Animation
     function reveal() {
         const reveals = document.querySelectorAll('.reveal');
-        for (let i = 0; i < reveals.length; i++) {
-            const windowHeight = window.innerHeight;
-            const elementTop = reveals[i].getBoundingClientRect().top;
-            const elementVisible = 150;
+        const windowHeight = window.innerHeight;
+        const elementVisible = 150;
+        reveals.forEach(rev => {
+            const elementTop = rev.getBoundingClientRect().top;
             if (elementTop < windowHeight - elementVisible) {
-                reveals[i].classList.add('active');
+                rev.classList.add('active');
             } else {
-                reveals[i].classList.remove('active');
+                rev.classList.remove('active');
             }
-        }
+        });
     }
     window.addEventListener('scroll', reveal);
     reveal(); // Initial check
@@ -157,33 +192,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('particle-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
         let particlesArray;
 
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
         class Particle {
-            constructor(x, y, directionX, directionY, size, color) {
+            constructor(x, y, directionX, directionY, size) {
                 this.x = x;
                 this.y = y;
                 this.directionX = directionX;
                 this.directionY = directionY;
                 this.size = size;
-                this.color = color;
             }
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = 'rgba(100, 255, 218, 0.2)';
+                const particleColor = document.documentElement.classList.contains('dark') 
+                                      ? 'rgba(100, 255, 218, 0.2)' 
+                                      : 'rgba(67, 56, 202, 0.2)';
+                ctx.fillStyle = particleColor;
                 ctx.fill();
             }
             update() {
-                if (this.x > canvas.width || this.x < 0) {
-                    this.directionX = -this.directionX;
-                }
-                if (this.y > canvas.height || this.y < 0) {
-                    this.directionY = -this.directionY;
-                }
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
                 this.x += this.directionX;
                 this.y += this.directionY;
                 this.draw();
@@ -191,6 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         function init() {
+            setCanvasSize();
             particlesArray = [];
             let numberOfParticles = (canvas.height * canvas.width) / 9000;
             for (let i = 0; i < numberOfParticles; i++) {
@@ -205,20 +241,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function animate() {
             requestAnimationFrame(animate);
-            ctx.clearRect(0,0,innerWidth, innerHeight);
-
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-            }
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            particlesArray.forEach(p => p.update());
         }
 
         init();
         animate();
 
-        window.addEventListener('resize', function(){
-            canvas.width = innerWidth;
-            canvas.height = innerHeight;
+        window.addEventListener('resize', () => {
             init();
         });
+        
+        // Redraw particles with correct color when theme changes
+        themeToggleBtn.addEventListener('click', init);
     }
 });

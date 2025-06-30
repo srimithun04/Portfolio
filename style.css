@@ -1,34 +1,99 @@
 /* Custom Styles */
 body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light Mode (Default) */
+:root {
+    --bg-color: #f9fafb;
+    --text-color: #1f2937;
+    --text-color-secondary: #4b5563;
+    --accent-color: #4338ca;
+    --card-bg: #ffffff;
+    --card-border: #e5e7eb;
+    --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --btn-bg: #1f2937;
+    --btn-text: #ffffff;
+    --hero-circle-bg: rgba(229, 231, 235, 0.7);
+    --header-bg: rgba(255, 255, 255, 0.8);
+}
+
+/* Dark Mode Styles */
+.dark {
+    --bg-color: #0a192f;
+    --text-color: #ccd6f6;
+    --text-color-secondary: #9ca3af;
+    --accent-color: #64ffda;
+    --card-bg: rgba(41, 51, 71, 0.5);
+    --card-border: rgba(100, 255, 218, 0.2);
+    --card-shadow: none;
+    --btn-bg: transparent;
+    --btn-text: #64ffda;
+    --hero-circle-bg: rgba(41, 51, 71, 0.5);
+    --header-bg: rgba(10, 25, 47, 0.85);
+}
+
+body {
     font-family: 'Poppins', sans-serif;
-    background-color: #0a192f; /* Navy background */
-    color: #ccd6f6; /* Light slate text */
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
-/* Custom accent color */
-.text-accent {
-    color: #64ffda;
+/* General elements */
+#header {
+    background-color: transparent;
+    transition: background-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
 }
-.bg-accent {
-    background-color: #64ffda;
-}
-.border-accent {
-    border-color: #64ffda;
-}
-
-/* Glassmorphism effect for cards */
-.glass-card {
-    background: rgba(41, 51, 71, 0.5); /* Semi-transparent navy */
+#header.header-scrolled {
+    background-color: var(--header-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(100, 255, 218, 0.2);
+}
+.nav-link {
+    color: var(--text-color-secondary);
+}
+.nav-link:hover {
+    color: var(--accent-color);
+    transition: color 0.3s ease;
+}
+
+/* Accent color */
+.text-accent {
+    color: var(--accent-color);
+}
+
+/* Card style */
+.glass-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.75rem;
     transition: all 0.3s ease;
+    box-shadow: var(--card-shadow);
+}
+.dark .glass-card {
+     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 .glass-card:hover {
-    background: rgba(41, 51, 71, 0.7);
-    border: 1px solid rgba(100, 255, 218, 0.4);
+    border-color: var(--accent-color);
     transform: translateY(-5px);
 }
+
+/* Text inside cards */
+.glass-card .card-title {
+    color: var(--text-color);
+    font-weight: bold;
+}
+.glass-card .card-description {
+    color: var(--text-color-secondary);
+}
+.dark .glass-card .card-tech-tag {
+    background-color: #1e293b; /* A dark slate for dark mode tags */
+}
+.light .glass-card .card-tech-tag {
+    background-color: #e5e7eb; /* A light gray for light mode tags */
+}
+
 
 /* Scroll-triggered animations */
 .reveal {
@@ -44,17 +109,54 @@ body {
 
 /* Custom button style */
 .btn {
-    color: #64ffda;
-    background-color: transparent;
-    border: 1px solid #64ffda;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.25rem;
-    font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+    display: inline-block;
+    color: var(--btn-text);
+    background-color: var(--btn-bg);
+    border: 1px solid var(--accent-color);
+    padding: 0.75rem 1.75rem;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
     font-size: 1rem;
     transition: all 0.3s ease;
 }
 .btn:hover {
-    background-color: rgba(100, 255, 218, 0.1);
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.dark .btn:hover {
+     box-shadow: 0 4px 15px rgba(100, 255, 218, 0.2);
+}
+
+
+/* Hero Image Styles */
+.hero-image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hero-image-container::before {
+    content: '';
+    position: absolute;
+    width: 90%;
+    height: 75%;
+    background-color: var(--hero-circle-bg);
+    border-radius: 50%;
+    z-index: 0;
+    transition: transform 0.6s ease;
+}
+.hero-image-container:hover::before {
+    transform: scale(1.05);
+}
+.hero-image {
+    position: relative;
+    z-index: 1;
+    width: 400px;
+    height: auto;
+    max-width: 100%;
 }
 
 /* Project card flip effect */
@@ -86,14 +188,4 @@ body {
 }
 .project-card-back {
     transform: rotateY(180deg);
-}
-
-/* Animated background canvas */
-#particle-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
 }
