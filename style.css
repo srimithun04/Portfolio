@@ -1,0 +1,99 @@
+/* Custom Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #0a192f; /* Navy background */
+    color: #ccd6f6; /* Light slate text */
+}
+
+/* Custom accent color */
+.text-accent {
+    color: #64ffda;
+}
+.bg-accent {
+    background-color: #64ffda;
+}
+.border-accent {
+    border-color: #64ffda;
+}
+
+/* Glassmorphism effect for cards */
+.glass-card {
+    background: rgba(41, 51, 71, 0.5); /* Semi-transparent navy */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    transition: all 0.3s ease;
+}
+.glass-card:hover {
+    background: rgba(41, 51, 71, 0.7);
+    border: 1px solid rgba(100, 255, 218, 0.4);
+    transform: translateY(-5px);
+}
+
+/* Scroll-triggered animations */
+.reveal {
+    position: relative;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: 1s all ease;
+}
+.reveal.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Custom button style */
+.btn {
+    color: #64ffda;
+    background-color: transparent;
+    border: 1px solid #64ffda;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+.btn:hover {
+    background-color: rgba(100, 255, 218, 0.1);
+}
+
+/* Project card flip effect */
+.project-card {
+    perspective: 1000px;
+}
+.project-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+.project-card:hover .project-card-inner {
+    transform: rotateY(180deg);
+}
+.project-card-front, .project-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+}
+.project-card-back {
+    transform: rotateY(180deg);
+}
+
+/* Animated background canvas */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}

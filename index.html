@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srimithun G - Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased">
+
+    <!-- Animated Particle Background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full bg-navy-alpha z-50 transition-all duration-300" id="header">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-accent">SG</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="hover:text-accent transition-colors">About</a>
+                <a href="#skills" class="hover:text-accent transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-accent transition-colors">Projects</a>
+                <a href="#contact" class="hover:text-accent transition-colors">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden">
+                <i class="ph-list text-3xl"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800">
+            <a href="#about" class="block py-2 px-4 text-sm hover:bg-slate-700">About</a>
+            <a href="#skills" class="block py-2 px-4 text-sm hover:bg-slate-700">Skills</a>
+            <a href="#projects" class="block py-2 px-4 text-sm hover:bg-slate-700">Projects</a>
+            <a href="#contact" class="block py-2 px-4 text-sm hover:bg-slate-700">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6">
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex flex-col justify-center">
+            <div class="max-w-3xl">
+                <p class="text-accent text-lg mb-4">Hi, my name is</p>
+                <h1 class="text-4xl md:text-7xl font-bold text-slate-100">Srimithun G.</h1>
+                <h2 class="text-4xl md:text-6xl font-bold text-slate-400 mt-2" id="typing-text"></h2>
+
+                <div class="mt-8">
+                    <a href="#projects" class="btn">Check out my work!</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24 reveal">
+            <h2 class="text-3xl font-bold mb-8 flex items-center"><span class="text-accent mr-4">01.</span> About Me</h2>
+            <div class="grid md:grid-cols-5 gap-10">
+                <div class="md:col-span-3 text-slate-400 space-y-4">
+                    <p>
+                        Hello! I'm Srimithun, a passionate student based in Bangalore, with a deep interest in technology and software development. My journey into computer science started with a simple curiosity for how things work, and it has since grown into a full-fledged passion for building useful and innovative software.
+                    </p>
+                    <p>
+                        I enjoy the challenge of breaking down complex problems and building elegant solutions. Whether it's developing a secure e-commerce platform or designing a system to detect security threats, I'm always eager to learn and apply new technologies.
+                    </p>
+                    <p>
+                        When I'm not coding, I enjoy exploring new tech trends, contributing to open-source projects, and collaborating with others to bring ideas to life.
+                    </p>
+                </div>
+                <div class="md:col-span-2 flex justify-center items-center">
+                    <div class="w-64 h-64 rounded-lg bg-slate-700 relative group">
+                        <div class="absolute inset-0 bg-accent rounded-lg transform translate-x-4 translate-y-4 transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-2"></div>
+                        <img src="DSC_3953.JPG" alt="Srimithun G" class="absolute inset-0 w-full h-full object-cover rounded-lg z-10">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-24 reveal">
+            <h2 class="text-3xl font-bold mb-8 flex items-center"><span class="text-accent mr-4">02.</span> My Skills</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-center">
+                <!-- Skill items will be injected here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-24 reveal">
+            <h2 class="text-3xl font-bold mb-8 text-center"><span class="text-accent">03.</span> My Projects</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Project cards will be injected here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 text-center reveal">
+            <h2 class="text-3xl font-bold mb-4"><span class="text-accent">04.</span> Get In Touch</h2>
+            <p class="max-w-xl mx-auto text-slate-400 mb-8">
+                I'm currently open to new opportunities and collaborations. Whether you have a question or just want to say hi, my inbox is always open. I'll get back to you as soon as I can!
+            </p>
+            <a href="mailto:srimithun2003@gmail.com" class="btn text-xl">Say Hello</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-slate-400">
+        <div class="flex justify-center space-x-6 mb-4">
+            <a href="https://github.com/srimithun04" target="_blank" class="hover:text-accent transition-colors"><i class="ph-github-logo text-3xl"></i></a>
+            <a href="https://www.linkedin.com/in/srimithun-g-5914432b1/" target="_blank" class="hover:text-accent transition-colors"><i class="ph-linkedin-logo text-3xl"></i></a>
+        </div>
+        <p>Designed & Built by Srimithun G</p>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js" defer></script>
+</body>
+</html>
