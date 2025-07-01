@@ -3,41 +3,66 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Light Mode (Default) */
+/* 🎨 LIGHT THEME: MODERN BEIGE */
 :root {
-    --bg-color: #f9fafb;
-    --text-color: #1f2937;
-    --text-color-secondary: #4b5563;
-    --accent-color: #4338ca;
-    --card-bg: #ffffff;
-    --card-border: #e5e7eb;
-    --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --btn-bg: #1f2937;
-    --btn-text: #ffffff;
-    --hero-circle-bg: rgba(229, 231, 235, 0.7);
-    --header-bg: rgba(255, 255, 255, 0.8);
+    --bg-color: #EEE5DA;
+    --text-color: #1a1919;
+    --text-color-secondary: #57534e;
+    --accent-color: #1a1919;
+    --card-bg: #fdfbf8;
+    --card-border: #e7e5e4;
+    --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
+    --btn-bg: #1a1919;
+    --btn-text: #EEE5DA;
+    --hero-circle-bg: rgba(231, 229, 228, 0.7);
+    --header-bg: rgba(238, 229, 218, 0.8);
+    --pattern-color: rgba(26, 25, 25, 0.2);
 }
 
-/* Dark Mode Styles */
+/* 🎨 DARK THEME: MODERN SLATE */
 .dark {
-    --bg-color: #0a192f;
-    --text-color: #ccd6f6;
+    --bg-color: #1a1919;
+    --text-color: #EEE5DA;
     --text-color-secondary: #9ca3af;
-    --accent-color: #64ffda;
-    --card-bg: rgba(41, 51, 71, 0.5);
-    --card-border: rgba(100, 255, 218, 0.2);
+    --accent-color: #EEE5DA;
+    --card-bg: rgba(55, 53, 53, 0.5);
+    --card-border: rgba(238, 229, 218, 0.2);
     --card-shadow: none;
     --btn-bg: transparent;
-    --btn-text: #64ffda;
-    --hero-circle-bg: rgba(41, 51, 71, 0.5);
-    --header-bg: rgba(10, 25, 47, 0.85);
+    --btn-text: #EEE5DA;
+    --hero-circle-bg: rgba(238, 229, 218, 0.05);
+    --header-bg: rgba(26, 25, 25, 0.85);
+    --pattern-color: rgba(238, 229, 218, 0.08);
 }
 
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
+    position: relative;
+    overflow-x: hidden;
 }
+
+/* New Animated Dot Pattern Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -1;
+    background-image: radial-gradient(var(--pattern-color) 1px, transparent 1px);
+    background-size: 20px 20px;
+    animation: move-dots 20s linear infinite;
+    transition: background 0.5s ease;
+}
+
+@keyframes move-dots {
+    from { background-position: 0 0; }
+    to { background-position: 40px 40px; }
+}
+
 
 /* General elements */
 #header {
@@ -49,9 +74,11 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
+
 .nav-link {
     color: var(--text-color-secondary);
 }
+
 .nav-link:hover {
     color: var(--accent-color);
     transition: color 0.3s ease;
@@ -70,10 +97,12 @@ body {
     transition: all 0.3s ease;
     box-shadow: var(--card-shadow);
 }
+
 .dark .glass-card {
      backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
+
 .glass-card:hover {
     border-color: var(--accent-color);
     transform: translateY(-5px);
@@ -88,12 +117,11 @@ body {
     color: var(--text-color-secondary);
 }
 .dark .glass-card .card-tech-tag {
-    background-color: #1e293b; /* A dark slate for dark mode tags */
+    background-color: #413f3f;
 }
 .light .glass-card .card-tech-tag {
-    background-color: #e5e7eb; /* A light gray for light mode tags */
+    background-color: #e7e5e4;
 }
-
 
 /* Scroll-triggered animations */
 .reveal {
@@ -102,6 +130,7 @@ body {
     opacity: 0;
     transition: 1s all ease;
 }
+
 .reveal.active {
     transform: translateY(0);
     opacity: 1;
@@ -120,23 +149,26 @@ body {
     font-size: 1rem;
     transition: all 0.3s ease;
 }
+
 .btn:hover {
     background-color: var(--accent-color);
     color: var(--bg-color);
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-.dark .btn:hover {
-     box-shadow: 0 4px 15px rgba(100, 255, 218, 0.2);
-}
 
+.dark .btn:hover {
+     box-shadow: 0 4px 15px rgba(238, 229, 218, 0.2);
+}
 
 /* Hero Image Styles */
 .hero-image-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 8px;
 }
 .hero-image-container::before {
     content: '';
@@ -148,21 +180,25 @@ body {
     z-index: 0;
     transition: transform 0.6s ease;
 }
+
 .hero-image-container:hover::before {
     transform: scale(1.05);
 }
+
 .hero-image {
-    position: relative;
-    z-index: 1;
-    width: 400px;
-    height: auto;
-    max-width: 100%;
+  position: relative;
+  z-index: 1;
+  width: 400px;
+  height: auto;
+  max-width: 100%;
+  animation: subtle-zoom-pan 15s ease-in-out infinite alternate;
 }
 
 /* Project card flip effect */
 .project-card {
     perspective: 1000px;
 }
+
 .project-card-inner {
     position: relative;
     width: 100%;
@@ -171,6 +207,7 @@ body {
     transition: transform 0.6s;
     transform-style: preserve-3d;
 }
+
 .project-card:hover .project-card-inner {
     transform: rotateY(180deg);
 }
@@ -186,6 +223,168 @@ body {
     align-items: center;
     padding: 1.5rem;
 }
+
 .project-card-back {
     transform: rotateY(180deg);
+}
+
+section[id] {
+  scroll-margin-top: 100px;
+}
+
+/* Page Load Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Class to apply the animation */
+.animate-on-load {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Optional classes for staggered effect */
+.delay-200 { animation-delay: 0.2s; }
+.delay-400 { animation-delay: 0.4s; }
+
+
+/* About Section Styling */
+.about-grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 80vh;
+}
+
+@media (min-width: 768px) {
+    .about-grid-container {
+        grid-template-columns: 2fr 3fr;
+    }
+}
+
+.about-image-side {
+    background-color: #000;
+    overflow: hidden;
+    height: 400px;
+}
+
+@media (min-width: 768px) {
+    .about-image-side {
+        height: 100%;
+    }
+}
+
+.about-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    opacity: 0.8;
+    transition: all 0.5s ease;
+    border-radius: 0; /* Ensures sharp corners */
+}
+
+.about-image:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    /* Removed the zoom effect */
+}
+
+.about-panel-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--card-bg); /* Changed to use theme's card color */
+    padding: 3rem 2rem;
+}
+
+@media (min-width: 768px) {
+    .about-panel-side {
+        padding: 4rem;
+    }
+}
+
+.about-panel-number {
+    font-size: 6rem;
+    font-weight: 800;
+    color: var(--pattern-color);
+    line-height: 1;
+}
+
+.about-panel-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-top: 0.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.about-panel-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 4px;
+    background-color: var(--accent-color);
+}
+
+.dark .about-panel-title::after {
+    background-color: var(--accent-color); /* Use accent color for underline in dark mode too */
+}
+
+.about-panel-text {
+    margin-top: 2rem;
+    color: var(--text-color-secondary);
+    text-align: justify;
+}
+
+.about-panel-text p {
+    margin-bottom: 1rem;
+}
+
+/* Footer Styling */
+.site-footer {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    text-align: center;
+    color: var(--text-color-secondary);
+    background-color: var(--header-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid var(--card-border);
+}
+
+.site-footer a {
+    color: var(--text-color-secondary);
+    transition: color 0.3s ease;
+}
+
+.site-footer a:hover {
+    color: var(--accent-color);
+}
+
+/* Theme Toggle Button Styling */
+.theme-toggle-btn {
+    padding: 0.625rem; /* p-2.5 */
+    border-radius: 0.5rem; /* rounded-lg */
+    color: var(--text-color-secondary);
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    color: var(--accent-color);
+    background-color: var(--card-border);
+}
+
+/* Mobile Menu Icon Styling */
+#main-nav #mobile-menu-button {
+    color: var(--text-color);
 }
