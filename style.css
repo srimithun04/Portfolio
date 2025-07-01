@@ -161,74 +161,38 @@ body::before {
     box-shadow: 0 4px 15px rgba(238, 229, 218, 0.2);
 }
 
-/* --- HERO SECTION STYLES --- */
-section#home {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding-top: 100px; /* Pushes content below fixed navbar */
-    box-sizing: border-box; /* Includes padding in height calculation */
+/* Hero Image Styles */
+.hero-image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.hero-image-container::before {
+    content: '';
+    position: absolute;
+    width: 90%;
+    height: 75%;
+    background-color: var(--hero-circle-bg);
+    border-radius: 50%;
+    z-index: 0;
+    transition: transform 0.6s ease;
 }
 
-.home-grid-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    min-height: 80vh;
-    width: 100%;
-    overflow: hidden;
-    border-radius: 0.5rem; /* Optional: adds rounded corners to the container */
-    box-shadow: var(--card-shadow);
+.hero-image-container:hover::before {
+    transform: scale(1.05);
 }
 
-.home-image-side {
-    background-color: #000;
-    overflow: hidden;
-    height: 400px;
-    order: -1;
+.hero-image {
+  position: relative;
+  z-index: 1;
+  width: 400px;
+  height: auto;
+  max-width: 100%;
+  animation: subtle-zoom-pan 15s ease-in-out infinite alternate;
 }
-
-.home-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Keep the image cropped */
-    object-position: center 25%; /* THIS IS THE CHANGE: Shifts image to show face */
-    opacity: 1;
-    transition: opacity 0.5s ease;
-}
-
-.home-panel-side {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: var(--card-bg);
-    padding: 3rem 2rem;
-}
-
-/* DESKTOP STYLES: Overrides for screens 768px and wider */
-@media (min-width: 768px) {
-    .home-grid-container {
-        grid-template-columns: 3fr 2fr;
-    }
-
-    .home-image-side {
-        height: 100%;
-        order: 0;
-    }
-
-    .home-image {
-        object-position: center center; /* Reset to default on desktop */
-        opacity: 0.9;
-    }
-
-    .home-image:hover {
-        opacity: 1;
-    }
-
-    .home-panel-side {
-        padding: 4rem;
-    }
-}
-
 
 /* Project card flip effect */
 .project-card {
@@ -329,13 +293,14 @@ section[id] {
 .about-image:hover {
     filter: grayscale(0%);
     opacity: 1;
+    /* Removed the zoom effect */
 }
 
 .about-panel-side {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: var(--card-bg);
+    background-color: var(--card-bg); /* Changed to use theme's card color */
     padding: 3rem 2rem;
 }
 
@@ -372,7 +337,7 @@ section[id] {
 }
 
 .dark .about-panel-title::after {
-    background-color: var(--accent-color);
+    background-color: var(--accent-color); /* Use accent color for underline in dark mode too */
 }
 
 .about-panel-text {

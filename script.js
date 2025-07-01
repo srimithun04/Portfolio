@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Set initial theme based on localStorage or OS preference
     const isDarkMode = localStorage.getItem('color-theme') === 'dark' || 
-                      (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                       (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
     document.documentElement.classList.toggle('dark', isDarkMode);
     updateIcons(isDarkMode);
